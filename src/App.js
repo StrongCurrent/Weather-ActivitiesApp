@@ -2,38 +2,56 @@ import "./App.css";
 import List from "./components/List/index";
 import Form from "./components/Form/index";
 import useLocalStorageState from "use-local-storage-state";
+import { uid } from "uid";
+import { useEffect, useState } from "react";
 
 function App() {
-  const testArray = [
-    {
-      name: "Radfahren",
-      isGoodWeather: true,
-    },
-  ];
+  const [goodWeather, setGoodWeather] = useState("");
+  useEffect(() => {
+    async function apiCall() {
+      try {
+        const baseUrl = "https://example-apis.vercel.app/api/weather";
+        const response = await fetch(baseUrl);
+        const weatherData = await response.json();
+        setGoodWeather(weatherData);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    apiCall();
+  });
 
-  const isGoodWeather = "on";
+  const default1 = [{ id: "420", activity: "Radfahren", goodWeather: true }];
 
   const [activities, setActivities] = useLocalStorageState("activities", {
-    defaultValue: testArray,
+    defaultValue: default1,
   });
   function handleActivities(data) {
-    setActivities([...activities, { ...data }]);
+    setActivities([...activities, { id: uid(), ...data }]);
   }
 
-  function handleFilter() {
-    setActivities(activities.map((item) => item.goodWeather === "on"));
+  const filterItems = activities.filter(
+    (item) => item.goodWeather === goodWeather.isGoodWeather
+  );
+  function buttonHandler(event) {
+    event.prevent.default();
+    const elementId = event.target.id;
+    // setActivities(activities.filter((n) => n.id !== elementId));
+    console.log(elementId);
   }
 
   return (
     <div className="App">
       <header className="App-header"></header>
       <main>
-        <List activities={activities} />
+        <List
+          activities={filterItems}
+          isGoodWeather={goodWeather}
+          buttonHandler={buttonHandler} />
         <Form handleActivities={handleActivities} />
       </main>
       <footer></footer>
     </div>
   );
 }
-
 export default App;
