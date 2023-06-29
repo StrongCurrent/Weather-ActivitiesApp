@@ -1,0 +1,11 @@
+li {
+  width: 80%;
+  margin: 10px 0px;
+  padding: 1rem;
+  background-color: #666;
+  list-style: none;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-align: left;
+}

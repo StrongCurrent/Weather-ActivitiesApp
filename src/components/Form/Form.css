@@ -1,0 +1,26 @@
+form {
+  width: 80%;
+  margin: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+form h2 {
+  font-weight: 400;
+}
+
+button {
+  font-size: 1.1em;
+  margin-top: 2rem;
+  padding: 5px 40px 5px 40px;
+  border-radius: 0.3rem;
+  border: solid 1px #ccc;
+}
+
+input {
+  margin-left: 5px;
+  border-radius: 0.3rem;
+}
