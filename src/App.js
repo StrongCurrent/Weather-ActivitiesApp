@@ -33,11 +33,12 @@ function App() {
   const filterItems = activities.filter(
     (item) => item.goodWeather === goodWeather.isGoodWeather
   );
+
   function buttonHandler(event) {
-    event.prevent.default();
-    const elementId = event.target.id;
-    // setActivities(activities.filter((n) => n.id !== elementId));
-    console.log(elementId);
+    event.preventDefault();
+    const elementId = event.target.parentElement.parentElement.id;
+    setActivities(activities.filter((n) => n.id !== elementId));
+    //console.log(elementId);
   }
 
   return (
