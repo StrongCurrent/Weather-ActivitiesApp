@@ -19,6 +19,9 @@ function App() {
       }
     }
     apiCall();
+    const interval = setInterval(apiCall, 5000);
+
+    return clearInterval(interval);
   });
 
   const default1 = [{ id: "420", activity: "Radfahren", goodWeather: true }];
